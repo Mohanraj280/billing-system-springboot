@@ -1,5 +1,6 @@
 package com.retail.billingSystem.Controller;
 
+import com.retail.billingSystem.Model.AuthenticationModel;
 import com.retail.billingSystem.ServiceLayer.AuthenticationService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,13 @@ public class AuthenticatorController {
     {
         boolean authenticated = authenticationService.authenticateUser(email,password,session);
         return authenticated?"Login Successful":"Invalid Credentials";
+    }
+
+
+    @PostMapping("/register")
+    public String registerUser(@RequestParam String email,@RequestParam String password)
+    {
+        String registerStatus = authenticationService.registerUser(email,password);
+        return registerStatus;
     }
 }

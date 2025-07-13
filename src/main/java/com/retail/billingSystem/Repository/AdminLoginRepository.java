@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface AdminLoginRepository extends MongoRepository<AuthenticationModel, Integer> {
+public interface AdminLoginRepository extends MongoRepository<AuthenticationModel, String> {
 
     AuthenticationModel findByEmail(String username);
 }

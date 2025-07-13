@@ -16,6 +16,11 @@ public class AuthenticationModel {
 
     public String role;
 
+    public String getId()
+    {
+        return Id;
+    }
+
     public String getEmail() {
         return email;
     }
