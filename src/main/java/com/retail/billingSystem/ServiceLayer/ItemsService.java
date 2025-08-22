@@ -13,6 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -34,10 +38,17 @@ public class ItemsService {
     {
         CategoryEntity category = categoryRepository.findById(categoryId)
                 .orElseThrow(()->new RuntimeException("Category Not Found"));
-        String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();
-        File file = new File(UPLOAD_DIR + fileName);
-        file.getParentFile().mkdirs();
-        image.transferTo(file);
+//        String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();
+//        File file = new File(UPLOAD_DIR + fileName);
+//        file.getParentFile().mkdirs();
+//        image.transferTo(file);
+
+        String fileName = image.getOriginalFilename();
+        Path filePath = Paths.get("uploads", fileName);
+        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+// Save this in imgUrl field:
+        String imageUrl = "http://localhost:8080/uploads/" + fileName;
 
         Date now = new Date();
 
@@ -46,7 +57,7 @@ public class ItemsService {
         item.setCategoryEntity(category);
         item.setPrice(price);
         item.setDescription(description);
-        item.setImageUrl("/" + UPLOAD_DIR + fileName);
+        item.setImageUrl(imageUrl);
         item.setCreatedAt(now);
         item.setUpdatedAt(now);
         return itemsRepository.save(item);

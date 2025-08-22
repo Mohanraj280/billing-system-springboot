@@ -18,12 +18,29 @@ public class CategoryEntity {
     private String name;
     private String description;
     private String bgColor;
-    private String imgUrl;
+//    private String imgUrl;
 
     private Date createdAt;
     private Date updatedAt;
 
+    private byte[] imageData; // New field to store the image
+    private String imageType;
 
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
 
     public String getId() {
         return id;
@@ -41,9 +58,9 @@ public class CategoryEntity {
         return bgColor;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
+//    public String getImgUrl() {
+//        return imgUrl;
+//    }
 
     public Date getCreatedAt() {
         return createdAt;
@@ -71,9 +88,9 @@ public class CategoryEntity {
         this.bgColor = bgColor;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
+//    public void setImgUrl(String imgUrl) {
+//        this.imgUrl = imgUrl;
+//    }
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
